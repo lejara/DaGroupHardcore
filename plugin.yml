@@ -1,0 +1,16 @@
+main: main.lagrouphardcore.Main
+name: LaGroupHardcore
+version: 1.0
+author: lejara
+description: Hardcore minecraft using a pool of lives
+commands:
+  setlives:
+    description: Set and Resets the number of lives
+    usage: /setlives [numOfLives]
+    permission: lagrouphardcore.mycommand
+    permission-message: You don't have the LaGroupHardcore.setlives permission.
+  resetlives:
+    description: Resets the current number of lives
+    usage: /resetlives
+    permission: lagrouphardcore.mycommand
+    permission-message: You don't have the LaGroupHardcore.setlives permission
