@@ -80,11 +80,16 @@ public class LivesManager {
 	}	
 	
 	private void Lose() {
-		worldFailed = true;		
-		main.WorldEnd();
-//		for (Player p : Bukkit.getOnlinePlayers()) {			
-//			p.kickPlayer("Hardcore Failed, no more lives");
-//		}
+		worldFailed = true;						
+		if(main.doWorldEndEvent) {
+			main.WorldEnd();
+		}
+		else {
+			for (Player p : Bukkit.getOnlinePlayers()) {			
+				p.kickPlayer("Hardcore Failed, no more lives");
+			}
+		}
+
 	}		
 	
 }

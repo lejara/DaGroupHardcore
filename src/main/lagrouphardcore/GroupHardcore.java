@@ -18,16 +18,19 @@
 package main.lagrouphardcore;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.TNTPrimed;
 import org.bukkit.plugin.java.JavaPlugin;
 
 
 public class GroupHardcore extends JavaPlugin {
 	
 	boolean doWorldEndEvent = true; // do false by defualt
+	int floorTntRadius = 1;
 	int defualtNumberOfLives = 3;		
 	int currentWorldUUID;
 	LivesManager livesManager;	
@@ -94,13 +97,46 @@ public class GroupHardcore extends JavaPlugin {
     }    
     
     public void WorldEnd() {
-    	Bukkit.broadcastMessage("World Will Now End");
     	
+    	Bukkit.broadcastMessage("World Is Now Ending....");
+    	World world = this.getServer().getWorlds().get(0);
+    	
+    	//Spawn Primed TNT in 5 secs
+    	Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
+		    public void run() {		    			    	
+		    	for (Player p : Bukkit.getOnlinePlayers()) {	
+		    		Location pLoc = p.getLocation();
+					int x_block = pLoc.getBlockX();
+					int y_block = pLoc.getBlockY() - 1;
+					int z_block = pLoc.getBlockZ();
+					
+					for(int xCoord = x_block - floorTntRadius; xCoord < x_block + floorTntRadius; xCoord++) {
+			            for(int zCoord = z_block - floorTntRadius; zCoord < z_block + floorTntRadius; zCoord++) {
+			            	world.spawn(new Location(world, xCoord, y_block, zCoord), TNTPrimed.class).setFuseTicks(10);
+//			            	world.spawn(new Location(world, xCoord, y_block, zCoord), LAVA.class);			            				            	
+			            }
+					}										
+		    	}		    			    	
+		    	
+		    }
+		}, 100L);
+    	
+    	//Kick All Player Warning 
     	Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
 		    public void run() {
-		    	Bukkit.broadcastMessage("has it been 10 secs?");
+		    	Bukkit.broadcastMessage("World Will Now Close...");		    	
 		    }
-		}, 200L);
-    }
-    
+		 }, 220L);
+    	
+    	//Kick All Players
+    	Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
+		    public void run() {
+				for (Player p : Bukkit.getOnlinePlayers()) {			
+					p.kickPlayer("Hardcore Failed, no more lives");
+				}
+		    	
+		    }
+		 }, 320L);
+
+    } 
 }
