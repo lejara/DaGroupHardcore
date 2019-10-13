@@ -1,3 +1,11 @@
+/**
+* 
+* Managing Class for lives
+* 
+* @author Lejara (Leonel Jara)
+* 
+*/
+
 package main.lagrouphardcore;
 
 import org.bukkit.Bukkit;
@@ -72,19 +80,11 @@ public class LivesManager {
 	}	
 	
 	private void Lose() {
-		worldFailed = true;
-		for (Player p : Bukkit.getOnlinePlayers()) {			
-			p.kickPlayer("Hardcore Failed, no more lives");
-		}
-	}
-	
-	
-	/*
-	 * Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
-		    public void run() {
-		                   
-		    }
-		}, 20L);
-	 */
+		worldFailed = true;		
+		main.WorldEnd();
+//		for (Player p : Bukkit.getOnlinePlayers()) {			
+//			p.kickPlayer("Hardcore Failed, no more lives");
+//		}
+	}		
 	
 }

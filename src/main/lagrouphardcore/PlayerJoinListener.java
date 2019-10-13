@@ -1,3 +1,12 @@
+/**
+* 
+* Event class on player joining the server
+* On join, the player will either be kick if the world has failed the hardcore,
+* Or the scoreboard of lives will be set
+* 
+* @author Lejara (Leonel Jara)
+* 
+*/
 package main.lagrouphardcore;
 
 

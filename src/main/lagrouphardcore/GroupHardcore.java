@@ -7,8 +7,17 @@
  * 
  */
 
+/**
+* Main Plugin class for this plugin
+* Primary use is to setup core classes/listeners, load and save config data
+* 
+* @author Lejara (Leonel Jara)
+* 
+*/
+
 package main.lagrouphardcore;
 
+import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -18,6 +27,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class GroupHardcore extends JavaPlugin {
 	
+	boolean doWorldEndEvent = true; // do false by defualt
 	int defualtNumberOfLives = 3;		
 	int currentWorldUUID;
 	LivesManager livesManager;	
@@ -44,6 +54,7 @@ public class GroupHardcore extends JavaPlugin {
     
     public void SaveToConfig(World world) {
     	System.out.print("Saved Lives");
+    	this.getConfig().set("DoWorldEndEvent", doWorldEndEvent);
     	this.getConfig().set("Lives", livesManager.lives);
     	this.getConfig().set("CurrentLives", livesManager.currentLives);
     	this.getConfig().set("World", world.getUID().variant());
@@ -62,14 +73,16 @@ public class GroupHardcore extends JavaPlugin {
     		int gotNumberOfLives = this.getConfig().getInt("Lives");
     		int gotCurrentLives = this.getConfig().getInt("CurrentLives");
     		boolean gotWorldFailed = this.getConfig().getBoolean("WorldFailed");
+    		doWorldEndEvent = this.getConfig().getBoolean("DoWorldEndEvent");
     		livesManager = new LivesManager(gotNumberOfLives, gotWorldFailed, gotCurrentLives, this);
     	}
     	else {    		
     		System.out.print("Did not load Lives, loading defaults");
     		livesManager = new LivesManager(defualtNumberOfLives, false, this);
     	}
-    }
-    
+    	
+    	SaveToConfig(this.getServer().getWorlds().get(0));
+    }        
            
     @Override
     public boolean onCommand(CommandSender sender,
@@ -80,5 +93,14 @@ public class GroupHardcore extends JavaPlugin {
     	return commandHandler.onCommand(sender, command, label, args);
     }    
     
+    public void WorldEnd() {
+    	Bukkit.broadcastMessage("World Will Now End");
+    	
+    	Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
+		    public void run() {
+		    	Bukkit.broadcastMessage("has it been 10 secs?");
+		    }
+		}, 200L);
+    }
     
 }

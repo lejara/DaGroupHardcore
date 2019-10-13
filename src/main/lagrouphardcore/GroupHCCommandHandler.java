@@ -1,3 +1,11 @@
+/**
+* 
+* Aggrogate class for all commands in this plugin
+* 
+* @author Lejara (Leonel Jara)
+* 
+*/
+
 package main.lagrouphardcore;
 
 import org.bukkit.command.Command;

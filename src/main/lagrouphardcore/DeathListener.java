@@ -1,3 +1,12 @@
+
+/**
+* 
+* Event class on player death
+* 
+* @author Lejara (Leonel Jara)
+* 
+*/
+
 package main.lagrouphardcore;
 
 import org.bukkit.entity.Player;
