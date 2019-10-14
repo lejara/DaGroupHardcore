@@ -27,6 +27,8 @@ public class DeathListener implements Listener{
     @EventHandler
 	public void onPlayerDeath(PlayerDeathEvent event) {
     	if(!lives.worldFailed) {
+    		event.setDeathMessage(event.getEntity().getDisplayName() + " has Died, lost one life");	
+    		
         	lives.LoseALive(event.getEntity());
     		//Play lost live sound mix
     		for (Player p : Bukkit.getOnlinePlayers()) {
@@ -35,8 +37,7 @@ public class DeathListener implements Listener{
     			p.playSound(p.getLocation(), Sound.AMBIENT_CAVE, 8, 8);
     			p.playSound(p.getLocation(), Sound.AMBIENT_CAVE, 2, 6);
     			p.playSound(p.getLocation(), Sound.ENTITY_ZOMBIE_CONVERTED_TO_DROWNED, 9, 1);
-    		}
-    		event.setDeathMessage(event.getEntity().getDisplayName() + " has Died, lost one life");	
+    		}    		
     	}
 	
 	}

@@ -15,6 +15,8 @@ import org.bukkit.scoreboard.Objective;
 import org.bukkit.scoreboard.Score;
 import org.bukkit.scoreboard.Scoreboard;
 
+import net.md_5.bungee.api.ChatColor;
+
 public class LivesManager {
 		
 	public int currentLives = 0;
@@ -80,6 +82,7 @@ public class LivesManager {
 	}	
 	
 	private void Lose() {
+		Bukkit.broadcastMessage(ChatColor.RED + "All Lives Are Gone!");
 		worldFailed = true;						
 		if(main.doWorldEndEvent) {
 			main.WorldEnd();
