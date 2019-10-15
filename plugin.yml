@@ -14,3 +14,8 @@ commands:
     usage: /resetlives
     permission: lagrouphardcore.mycommand
     permission-message: You don't have the LaGroupHardcore.setlives permission
+  setworldend:
+    description: Sets the world end event to happend after you have failed the hardcore world
+    usage: /setworldend {[0] | [1]]}
+    permission: lagrouphardcore.mycommand
+    permission-message: You don't have the LaGroupHardcore.setlives permission

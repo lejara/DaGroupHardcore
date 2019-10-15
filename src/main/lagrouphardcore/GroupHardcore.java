@@ -28,7 +28,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class GroupHardcore extends JavaPlugin {
 	
-	boolean doWorldEndEvent = true; // do false by defualt
+	boolean doWorldEndEvent = false;
 	int defualtNumberOfLives = 3;		
 	LivesManager livesManager;	
 	GroupHCCommandHandler commandHandler;
@@ -39,7 +39,7 @@ public class GroupHardcore extends JavaPlugin {
     	        	
     	LoadFromConfig();
     	    	
-    	commandHandler = new GroupHCCommandHandler(livesManager);
+    	commandHandler = new GroupHCCommandHandler(livesManager, this);
     	worldEndEvent = new WorldEndEvent(this);
     	
     	getServer().getPluginManager().registerEvents(new DeathListener(livesManager), this);
@@ -54,14 +54,14 @@ public class GroupHardcore extends JavaPlugin {
     	SaveToConfig(player.getWorld());
     }
     
-    public void SaveToConfig(World world) {
-    	System.out.print("Saved Lives");
+    public void SaveToConfig(World world) {    	
     	this.getConfig().set("DoWorldEndEvent", doWorldEndEvent);
     	this.getConfig().set("Lives", livesManager.lives);
     	this.getConfig().set("CurrentLives", livesManager.currentLives);
     	this.getConfig().set("WorldID", world.getUID().hashCode());    	
     	this.getConfig().set("WorldFailed", livesManager.worldFailed);
     	this.saveConfig();
+    	System.out.print("[LaGroupHardcore] Config and Data Saved");
     }
     
     public void LoadFromConfig() {
@@ -70,7 +70,7 @@ public class GroupHardcore extends JavaPlugin {
     	int getWorldID = this.getConfig().getInt("WorldID");
     	
     	if(getWorldID != 0 && getWorldID == currentWorld.getUID().hashCode()) {
-    		System.out.print("Loaded Lives, World UID Hash: " + currentWorld.getUID().hashCode());
+    		System.out.print("[LaGroupHardcore] Loaded Config and Data, World UID Hash: " + currentWorld.getUID().hashCode());
     		int gotNumberOfLives = this.getConfig().getInt("Lives");
     		int gotCurrentLives = this.getConfig().getInt("CurrentLives");
     		boolean gotWorldFailed = this.getConfig().getBoolean("WorldFailed");
@@ -78,11 +78,12 @@ public class GroupHardcore extends JavaPlugin {
     		livesManager = new LivesManager(gotNumberOfLives, gotWorldFailed, gotCurrentLives, this);
     	}
     	else {    		
-    		System.out.print("Did not load Lives, loading defaults");
+    		System.out.print("[LaGroupHardcore] Did not load Config and Data, will load defaults");
     		livesManager = new LivesManager(defualtNumberOfLives, false, this);
+    		SaveToConfig(this.getServer().getWorlds().get(0));
     	}
     	
-    	SaveToConfig(this.getServer().getWorlds().get(0));
+    	
     }        
            
     @Override
