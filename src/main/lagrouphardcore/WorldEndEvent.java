@@ -23,7 +23,7 @@ import net.md_5.bungee.api.ChatColor;
 public class WorldEndEvent {
 		
 	GroupHardcore main;
-	int floorExploRadius = 2;
+	int floorExploRadius = 1;
 	int randomRange = 6;
 	Long playerKickWarningTime = 920L;
 	Long playerKickTime = 1220L;

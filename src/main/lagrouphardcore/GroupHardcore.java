@@ -59,7 +59,7 @@ public class GroupHardcore extends JavaPlugin {
     	this.getConfig().set("DoWorldEndEvent", doWorldEndEvent);
     	this.getConfig().set("Lives", livesManager.lives);
     	this.getConfig().set("CurrentLives", livesManager.currentLives);
-    	this.getConfig().set("WorldID", world.getUID().variant());    	
+    	this.getConfig().set("WorldID", world.getUID().hashCode());    	
     	this.getConfig().set("WorldFailed", livesManager.worldFailed);
     	this.saveConfig();
     }
@@ -69,8 +69,8 @@ public class GroupHardcore extends JavaPlugin {
     	
     	int getWorldID = this.getConfig().getInt("WorldID");
     	
-    	if(getWorldID != 0 && getWorldID == (currentWorld.getUID().variant())) {
-    		System.out.print("Loaded Lives, World UUID: " + (currentWorld.getUID().variant() + currentWorld.getSeed()));
+    	if(getWorldID != 0 && getWorldID == currentWorld.getUID().hashCode()) {
+    		System.out.print("Loaded Lives, World UID Hash: " + currentWorld.getUID().hashCode());
     		int gotNumberOfLives = this.getConfig().getInt("Lives");
     		int gotCurrentLives = this.getConfig().getInt("CurrentLives");
     		boolean gotWorldFailed = this.getConfig().getBoolean("WorldFailed");
