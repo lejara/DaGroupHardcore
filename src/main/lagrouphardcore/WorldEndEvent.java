@@ -141,6 +141,7 @@ public class WorldEndEvent {
 			Location dumpLoc = p.getLocation();
 			dumpLoc.setY(-2d);
 			p.teleport(dumpLoc);
+			p.setBedSpawnLocation(dumpLoc, true);
 		}
 	}
 	
