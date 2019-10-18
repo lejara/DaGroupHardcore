@@ -6,6 +6,7 @@ import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.World;
 import org.bukkit.block.Block;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.TNTPrimed;
 
@@ -26,28 +27,32 @@ public class WorldEndEvent {
 	int floorExploRadius = 1;
 	int randomRange = 6;
 	Long playerKickWarningTime = 920L;
-	Long playerKickTime = 1220L;
+	Long playerKickTime = 1000L;
 	
 	WorldEndEvent(GroupHardcore m){
 		main = m;
 	}
 	
 	public void StartEvent() {
-		Bukkit.broadcastMessage(ChatColor.RED + "World Will Now End.");
+		Bukkit.broadcastMessage(ChatColor.RED + "World Will Now End. >:)");
     	World world = main.getServer().getWorlds().get(0);
     	world.setTime(13000);
-    	endingPlaySounds(20L);
-    	//Spawn Primed TNT, and lava below the player in 5 secs
-    	spawnExplo(100L, world);
-    	//Spawn Primed TNT, and lava below the player in 15 secs
-    	spawnExplo(300L, world);
-    	//Spawn Primed TNT, and lava below the player in 25 secs
-    	spawnExplo(500L, world);
-    	//Spawn Primed TNT, and lava below the player in 35 secs
-    	spawnExplo(700L, world);
-    	//Spawn Primed TNT, and lava below the player in 45 secs
-    	spawnExplo(900L, world);
+    	endingPlaySounds(55L);
     	
+    	//Spawn Primed TNT, and lava below the player in 5 secs
+    	spawnExplo(100L);
+    	//Spawn mobs 
+    	spawnBaddies(120L);
+    	//Spawn Primed TNT, and lava below the player in 15 secs
+    	spawnExplo(300L);
+    	//Spawn Primed TNT, and lava below the player in 25 secs
+    	spawnExplo(500L);
+    	//Spawn mobs 
+    	spawnBaddies(520L);
+    	//Spawn Primed TNT, and lava below the player in 35 secs
+    	spawnExplo(700L);
+    	//Spawn Primed TNT, and lava below the player in 45 secs
+    	spawnExplo(900L);
     	//Kick All Player Warning 
     	playerDelayKickWarning();
     	//Kick All Players
@@ -55,25 +60,35 @@ public class WorldEndEvent {
 	}
 	
 	private void endingPlaySounds(Long interval) {
+
 		
-    	Bukkit.getScheduler().scheduleSyncDelayedTask(main, new Runnable() {
+    	Bukkit.getScheduler().scheduleSyncDelayedTask(main, new Runnable() {    		
+    		
 		    public void run() {
 	    		for (Player p : Bukkit.getOnlinePlayers()) {
 	    			
-	    			p.playSound(p.getLocation(), Sound.AMBIENT_UNDERWATER_EXIT, 10, 6);
-	    			p.playSound(p.getLocation(), Sound.ENTITY_ZOMBIE_ATTACK_WOODEN_DOOR, 8, 8);
-	    			p.playSound(p.getLocation(), Sound.ENTITY_SKELETON_DEATH, 2, 6);
-	    			p.playSound(p.getLocation(), Sound.ENTITY_SKELETON_DEATH, 9, 1);
-	    			p.playSound(p.getLocation(), Sound.ENTITY_SKELETON_DEATH, 9, 1);
+	    			p.playSound(p.getLocation(), Sound.AMBIENT_UNDERWATER_EXIT, 3, 6);
+	    			p.playSound(p.getLocation(), Sound.BLOCK_BELL_RESONATE, 4, 8);
+	    			p.playSound(p.getLocation(), Sound.BLOCK_BELL_RESONATE, 4, 8);
+	    			p.playSound(p.getLocation(), Sound.AMBIENT_CAVE, 5, 6);
+	    			p.playSound(p.getLocation(), Sound.AMBIENT_CAVE, 5, 6);
+	    			p.playSound(p.getLocation(), Sound.AMBIENT_CAVE, 5, 6);
 	    		}    
+	    		
 	    		if(!Bukkit.getOnlinePlayers().isEmpty()) {
-	    			endingPlaySounds(interval);
+	    			if (interval <= 5) {
+	    				endingPlaySounds(interval);
+	    			}
+	    			else {
+	    				endingPlaySounds(interval - 1);
+	    			}
+	    			
 	    		}	    		
 		    }
 		 }, interval);
 	}
 	
-	private void spawnExplo(Long Delay, World world) {
+	private void spawnExplo(Long Delay) {
 
     	Bukkit.getScheduler().scheduleSyncDelayedTask(main, new Runnable() {
 		    public void run() {		    			    	
@@ -87,10 +102,10 @@ public class WorldEndEvent {
 		    		
 		    		for(int xCoord = x_block - floorExploRadius; xCoord < x_block + floorExploRadius; xCoord++) {
 		                for(int zCoord = z_block - floorExploRadius; zCoord < z_block + floorExploRadius; zCoord++) {
-		                	Location spawnLoc = new Location(world, xCoord, y_block, zCoord);
+		                	Location spawnLoc = new Location(main.currentWorld, xCoord, y_block, zCoord);
 		                	spawnLoc.setX((int)(Math.random() * randomRange + spawnLoc.getX()));
 		                	spawnLoc.setZ((int)(Math.random() * randomRange + spawnLoc.getZ()));
-		                	world.spawn(spawnLoc, TNTPrimed.class).setFuseTicks(15);			            				            	
+		                	main.currentWorld.spawn(spawnLoc, TNTPrimed.class).setFuseTicks(15);			            				            	
 		                	Block block = spawnLoc.getBlock(); 	            				            	
 		                	block.setType(Material.LAVA);
 		                }
@@ -101,12 +116,39 @@ public class WorldEndEvent {
 		}, Delay);
 	}
 	
+	private void spawnBaddies(Long Delay) {
+
+    	Bukkit.getScheduler().scheduleSyncDelayedTask(main, new Runnable() {
+		    public void run() {
+				for (Player p : Bukkit.getOnlinePlayers()) {					
+					
+					main.currentWorld.spawnEntity(p.getLocation(), EntityType.ZOMBIE);	
+					main.currentWorld.spawnEntity(p.getLocation(), EntityType.ZOMBIE);	
+					main.currentWorld.spawnEntity(p.getLocation(), EntityType.SKELETON);
+					main.currentWorld.spawnEntity(p.getLocation(), EntityType.ZOMBIE);	
+					main.currentWorld.spawnEntity(p.getLocation(), EntityType.ZOMBIE);	
+					main.currentWorld.spawnEntity(p.getLocation(), EntityType.SKELETON);
+					System.out.print("-dev- try spawn mob");
+				}
+		    	
+		    }
+		 }, Delay);
+		
+	}
+	
+	private void dropPlayerToEndWorld() {
+		for (Player p : Bukkit.getOnlinePlayers()) {
+			Location dumpLoc = p.getLocation();
+			dumpLoc.setY(-2d);
+			p.teleport(dumpLoc);
+		}
+	}
+	
 	private void playerDelayKickWarning() {    	
     	Bukkit.getScheduler().scheduleSyncDelayedTask(main, new Runnable() {
 		    public void run() {
-		    	Bukkit.broadcastMessage(ChatColor.RED + "Goodbye in " + 
-		    			((int)(playerKickTime-playerKickWarningTime))/20
-		    			+ "secs...");		    	
+		    	Bukkit.broadcastMessage(ChatColor.RED + "Goodbye Losers.");	
+		    	dropPlayerToEndWorld();
 		    }
 		 }, playerKickWarningTime);
 	}

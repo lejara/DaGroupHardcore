@@ -76,13 +76,13 @@ public class GroupHCCommandHandler {
 				if(num == 0) {
 					Bukkit.broadcastMessage(ChatColor.DARK_GREEN   + "World End is Now Set to True. Good Choice :)");
 					main.doWorldEndEvent = true;
-					main.SaveToConfig(main.getServer().getWorlds().get(0));
+					main.SaveToConfig(main.currentWorld);
 					return true;
 				}
 				else if(num == 1) {
 					Bukkit.broadcastMessage(ChatColor.YELLOW + "World End is Now Set to False. Coward!");
 					main.doWorldEndEvent = false;
-					main.SaveToConfig(main.getServer().getWorlds().get(0));
+					main.SaveToConfig(main.currentWorld);
 					return true;
 				}
 				else {

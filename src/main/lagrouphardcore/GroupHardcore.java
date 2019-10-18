@@ -29,7 +29,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class GroupHardcore extends JavaPlugin {
 	
 	boolean doWorldEndEvent = false;
-	int defualtNumberOfLives = 3;		
+	int defualtNumberOfLives = 3;	
+	World currentWorld;
 	LivesManager livesManager;	
 	GroupHCCommandHandler commandHandler;
 	WorldEndEvent worldEndEvent;
@@ -41,7 +42,7 @@ public class GroupHardcore extends JavaPlugin {
     	    	
     	commandHandler = new GroupHCCommandHandler(livesManager, this);
     	worldEndEvent = new WorldEndEvent(this);
-    	
+    	currentWorld = getServer().getWorlds().get(0);
     	getServer().getPluginManager().registerEvents(new DeathListener(livesManager), this);
     	getServer().getPluginManager().registerEvents(new PlayerJoinListener(livesManager), this);
     	    	

@@ -47,7 +47,7 @@ public class LivesManager {
 		currentLives = lives;
 		worldFailed = false;
 		UpdateScoreBoardOfLives();
-		main.SaveToConfig(main.getServer().getWorlds().get(0));
+		main.SaveToConfig(main.currentWorld);
 	}
 	
 	public void LoseALive(Player player) {		
