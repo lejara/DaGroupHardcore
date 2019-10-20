@@ -25,7 +25,8 @@ public class WorldEndEvent {
 		
 	GroupHardcore main;
 	int floorExploRadius = 1;
-	int randomRange = 6;
+	int randomRange = 18;
+	int awayFromPlayer = 3;
 	Long playerKickWarningTime = 920L;
 	Long playerKickTime = 1000L;
 	
@@ -107,8 +108,8 @@ public class WorldEndEvent {
 		    		for(int xCoord = x_block - floorExploRadius; xCoord < x_block + floorExploRadius; xCoord++) {
 		                for(int zCoord = z_block - floorExploRadius; zCoord < z_block + floorExploRadius; zCoord++) {
 		                	Location spawnLoc = new Location(main.currentWorld, xCoord, y_block, zCoord);
-		                	spawnLoc.setX((int)(Math.random() * randomRange + spawnLoc.getX()));
-		                	spawnLoc.setZ((int)(Math.random() * randomRange + spawnLoc.getZ()));
+		                	spawnLoc.setX((int)(Math.random() * randomRange + (spawnLoc.getX() + awayFromPlayer)));
+		                	spawnLoc.setZ((int)(Math.random() * randomRange + (spawnLoc.getZ()+ awayFromPlayer)));
 		                	main.currentWorld.spawn(spawnLoc, TNTPrimed.class).setFuseTicks(15);			            				            	
 		                	Block block = spawnLoc.getBlock(); 	            				            	
 		                	block.setType(Material.LAVA);

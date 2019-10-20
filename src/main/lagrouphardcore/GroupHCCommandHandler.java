@@ -11,6 +11,7 @@ package main.lagrouphardcore;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 
 import net.md_5.bungee.api.ChatColor;
 
@@ -34,6 +35,9 @@ public class GroupHCCommandHandler {
 		}
 		else if(command.getName().equalsIgnoreCase("setworldend")) {
 			return setWorldEndEvent(sender, args);
+		}
+		else if (command.getName().equalsIgnoreCase("resetplayerspawn")) {
+			return resetPlayersSpawn(sender);
 		}
 		
         return false;
@@ -74,13 +78,13 @@ public class GroupHCCommandHandler {
 			try {
 				int num = Integer.parseInt(args[0]);
 				if(num == 0) {
-					Bukkit.broadcastMessage(ChatColor.DARK_GREEN   + "World End is Now Set to True. Good Choice :)");
+					Bukkit.broadcastMessage(ChatColor.DARK_GREEN   + "World End is Now Set to True in this world. Good Choice :)");
 					main.doWorldEndEvent = true;
 					main.saveToConfig(main.currentWorld);
 					return true;
 				}
 				else if(num == 1) {
-					Bukkit.broadcastMessage(ChatColor.YELLOW + "World End is Now Set to False. Coward!");
+					Bukkit.broadcastMessage(ChatColor.YELLOW + "World End is Now Set to False in this world. Coward!");
 					main.doWorldEndEvent = false;
 					main.saveToConfig(main.currentWorld);
 					return true;
@@ -96,6 +100,15 @@ public class GroupHCCommandHandler {
 			sender.sendMessage("Error number of args, must be one");
 		}
 		return false;		
+	}
+	
+	public boolean resetPlayersSpawn(CommandSender sender) {		
+		for(Player p : Bukkit.getOnlinePlayers()) {
+			p.setBedSpawnLocation(main.currentWorld.getSpawnLocation());
+		}
+		sender.sendMessage("All Online players Respawn reseted");
+		return true;
+		
 	}
 	
 	

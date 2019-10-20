@@ -19,3 +19,8 @@ commands:
     usage: /setworldend {[0] | [1]]}
     permission: lagrouphardcore.mycommand
     permission-message: You don't have the LaGroupHardcore.setlives permission
+  resetplayerspawn:
+    description: resets all online players spawn point
+    usage: /resetplayerspawn
+    permission: lagrouphardcore.mycommand
+    permission-message: You don't have the LaGroupHardcore.setlives permission     

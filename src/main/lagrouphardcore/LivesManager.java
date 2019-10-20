@@ -46,7 +46,7 @@ public class LivesManager {
 	public void resetLives() {
 		currentLives = lives;
 		worldFailed = false;
-		updateScoreBoardOfLives();
+		updateScoreBoardOfLives();			
 		main.saveToConfig(main.currentWorld);
 	}
 	
@@ -55,10 +55,8 @@ public class LivesManager {
 		if(currentLives < 0) {
 			lose();
 			currentLives = 0;
-		}
-		
-		updateScoreBoardOfLives();
-		
+		}		
+		updateScoreBoardOfLives();		
 		main.saveToConfig(player);
 	}
 	
@@ -66,7 +64,7 @@ public class LivesManager {
 	
 	public void setScoreBoardOfLives(Player player) {
         Scoreboard board = Bukkit.getScoreboardManager().getNewScoreboard();
-        Objective obj = board.registerNewObjective("LivesObj", "life", "----");
+        Objective obj = board.registerNewObjective("LivesObj", "life", " ");
         obj.setDisplaySlot(DisplaySlot.SIDEBAR);        
         Score livesScore = obj.getScore("Lives: ");
         livesScore.setScore(currentLives);
