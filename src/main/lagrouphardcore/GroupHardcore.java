@@ -18,6 +18,7 @@
 package main.lagrouphardcore;
 
 
+import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -30,6 +31,7 @@ public class GroupHardcore extends JavaPlugin {
 	
 	boolean doWorldEndEvent = false;
 	int defualtNumberOfLives = 3;	
+	Long worldEndStartDelay = 100L;
 	World currentWorld;
 	LivesManager livesManager;	
 	GroupHCCommandHandler commandHandler;
@@ -97,6 +99,13 @@ public class GroupHardcore extends JavaPlugin {
     }    
     
     public void WorldEnd() {
-    	worldEndEvent.StartEvent();
+    	
+    	Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
+		    public void run() {
+		    	worldEndEvent.StartEvent();
+		    }
+		 }, worldEndStartDelay);
+    	
+    	
     } 
 }

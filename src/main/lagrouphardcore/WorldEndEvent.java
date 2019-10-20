@@ -36,9 +36,13 @@ public class WorldEndEvent {
 	public void StartEvent() {
 		Bukkit.broadcastMessage(ChatColor.RED + "World Will Now End. >:)");
     	World world = main.getServer().getWorlds().get(0);
+    	
     	world.setTime(13000);
+    	
     	endingPlaySounds(55L);
     	
+    	//Spawn mobs 
+    	spawnBaddies(80L);
     	//Spawn Primed TNT, and lava below the player in 5 secs
     	spawnExplo(100L);
     	//Spawn mobs 
@@ -122,13 +126,13 @@ public class WorldEndEvent {
 		    public void run() {
 				for (Player p : Bukkit.getOnlinePlayers()) {					
 					
-					main.currentWorld.spawnEntity(p.getLocation(), EntityType.ZOMBIE);	
-					main.currentWorld.spawnEntity(p.getLocation(), EntityType.ZOMBIE);	
-					main.currentWorld.spawnEntity(p.getLocation(), EntityType.SKELETON);
-					main.currentWorld.spawnEntity(p.getLocation(), EntityType.ZOMBIE);	
-					main.currentWorld.spawnEntity(p.getLocation(), EntityType.ZOMBIE);	
-					main.currentWorld.spawnEntity(p.getLocation(), EntityType.SKELETON);
-					System.out.print("-dev- try spawn mob");
+					Location spawn = p.getLocation();
+					spawn.setY(spawn.getBlockY() + 4);
+					main.currentWorld.spawnEntity(spawn, EntityType.GHAST);
+					main.currentWorld.spawnEntity(spawn, EntityType.GHAST);
+					main.currentWorld.spawnEntity(spawn, EntityType.PHANTOM);
+					main.currentWorld.spawnEntity(spawn, EntityType.PHANTOM);
+					main.currentWorld.spawnEntity(spawn, EntityType.PHANTOM);
 				}
 		    	
 		    }
