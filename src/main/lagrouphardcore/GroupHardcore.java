@@ -31,7 +31,7 @@ public class GroupHardcore extends JavaPlugin {
 	
 	boolean doWorldEndEvent = false;
 	int defualtNumberOfLives = 3;	
-	Long worldEndStartDelay = 100L;
+	Long worldEndStartDelay = 180L;
 	World currentWorld;
 	LivesManager livesManager;	
 	GroupHCCommandHandler commandHandler;

@@ -64,7 +64,7 @@ public class LivesManager {
 	
 	public void setScoreBoardOfLives(Player player) {
         Scoreboard board = Bukkit.getScoreboardManager().getNewScoreboard();
-        Objective obj = board.registerNewObjective("LivesObj", "life", " ");
+        Objective obj = board.registerNewObjective("LivesObj", "life", "----");
         obj.setDisplaySlot(DisplaySlot.SIDEBAR);        
         Score livesScore = obj.getScore("Lives: ");
         livesScore.setScore(currentLives);
