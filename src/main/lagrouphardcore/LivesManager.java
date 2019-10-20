@@ -38,28 +38,28 @@ public class LivesManager {
 		worldFailed = wf;
 	}
 	
-	public void SetLives(int l) {
+	public void setLives(int l) {
 		lives = l;
-		ResetLives();		
+		resetLives();		
 	}
 	
-	public void ResetLives() {
+	public void resetLives() {
 		currentLives = lives;
 		worldFailed = false;
-		UpdateScoreBoardOfLives();
-		main.SaveToConfig(main.currentWorld);
+		updateScoreBoardOfLives();
+		main.saveToConfig(main.currentWorld);
 	}
 	
-	public void LoseALive(Player player) {		
+	public void loseALive(Player player) {		
 		currentLives--;
 		if(currentLives < 0) {
-			Lose();
+			lose();
 			currentLives = 0;
 		}
 		
-		UpdateScoreBoardOfLives();
+		updateScoreBoardOfLives();
 		
-		main.SaveToConfig(player);
+		main.saveToConfig(player);
 	}
 	
 	
@@ -74,18 +74,18 @@ public class LivesManager {
 	}
 		
 	
-	private void UpdateScoreBoardOfLives() {
+	private void updateScoreBoardOfLives() {
 		for (Player p : Bukkit.getOnlinePlayers()) {
 			Scoreboard board = p.getScoreboard();
 			board.getObjective("LivesObj").getScore("Lives: ").setScore(currentLives);
 		}
 	}	
 	
-	private void Lose() {
+	private void lose() {
 		Bukkit.broadcastMessage(ChatColor.RED + "All Lives Are Gone!");
 		worldFailed = true;						
 		if(main.doWorldEndEvent) {
-			main.WorldEnd();
+			main.worldEnd();
 		}
 		else {
 			for (Player p : Bukkit.getOnlinePlayers()) {			

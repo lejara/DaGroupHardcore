@@ -48,7 +48,7 @@ public class GroupHCCommandHandler {
 					sender.sendMessage("Error number must be grater or equal to 0");
 				}
 				else {
-					lives.SetLives(num);
+					lives.setLives(num);
 					sender.sendMessage("Lives Set to " + args[0]);
 					return true;
 				}										
@@ -65,7 +65,7 @@ public class GroupHCCommandHandler {
 	
 	public boolean resetLives(CommandSender sender) {
 		sender.sendMessage("Lives has been reset");
-		lives.ResetLives();
+		lives.resetLives();
 		return true;
 	}
 	
@@ -76,13 +76,13 @@ public class GroupHCCommandHandler {
 				if(num == 0) {
 					Bukkit.broadcastMessage(ChatColor.DARK_GREEN   + "World End is Now Set to True. Good Choice :)");
 					main.doWorldEndEvent = true;
-					main.SaveToConfig(main.currentWorld);
+					main.saveToConfig(main.currentWorld);
 					return true;
 				}
 				else if(num == 1) {
 					Bukkit.broadcastMessage(ChatColor.YELLOW + "World End is Now Set to False. Coward!");
 					main.doWorldEndEvent = false;
-					main.SaveToConfig(main.currentWorld);
+					main.saveToConfig(main.currentWorld);
 					return true;
 				}
 				else {

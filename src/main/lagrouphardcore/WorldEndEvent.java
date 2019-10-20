@@ -33,7 +33,7 @@ public class WorldEndEvent {
 		main = m;
 	}
 	
-	public void StartEvent() {
+	public void startEvent() {
 		Bukkit.broadcastMessage(ChatColor.RED + "World Will Now End. >:)");
     	World world = main.getServer().getWorlds().get(0);
     	

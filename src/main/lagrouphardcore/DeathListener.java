@@ -29,7 +29,7 @@ public class DeathListener implements Listener{
     	if(!lives.worldFailed) {
     		event.setDeathMessage(event.getEntity().getDisplayName() + " has Died, lost one life");	
     		
-        	lives.LoseALive(event.getEntity());
+        	lives.loseALive(event.getEntity());
     		//Play lost live sound mix
     		for (Player p : Bukkit.getOnlinePlayers()) {
     			

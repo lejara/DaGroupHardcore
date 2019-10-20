@@ -40,7 +40,7 @@ public class GroupHardcore extends JavaPlugin {
     @Override
     public void onEnable() {
     	        	
-    	LoadFromConfig();
+    	loadFromConfig();
     	    	
     	commandHandler = new GroupHCCommandHandler(livesManager, this);
     	worldEndEvent = new WorldEndEvent(this);
@@ -53,11 +53,11 @@ public class GroupHardcore extends JavaPlugin {
     public void onDisable() {
     }
     
-    public void SaveToConfig(Player player) {
-    	SaveToConfig(player.getWorld());
+    public void saveToConfig(Player player) {
+    	saveToConfig(player.getWorld());
     }
     
-    public void SaveToConfig(World world) {    	
+    public void saveToConfig(World world) {    	
     	this.getConfig().set("DoWorldEndEvent", doWorldEndEvent);
     	this.getConfig().set("Lives", livesManager.lives);
     	this.getConfig().set("CurrentLives", livesManager.currentLives);
@@ -67,7 +67,7 @@ public class GroupHardcore extends JavaPlugin {
     	System.out.print("[LaGroupHardcore] Config and Data Saved");
     }
     
-    public void LoadFromConfig() {
+    public void loadFromConfig() {
     	World currentWorld = getServer().getWorlds().get(0);
     	
     	int getWorldID = this.getConfig().getInt("WorldID");
@@ -83,7 +83,7 @@ public class GroupHardcore extends JavaPlugin {
     	else {    		
     		System.out.print("[LaGroupHardcore] Did not load Config and Data, will load defaults");
     		livesManager = new LivesManager(defualtNumberOfLives, false, this);
-    		SaveToConfig(this.getServer().getWorlds().get(0));
+    		saveToConfig(this.getServer().getWorlds().get(0));
     	}
     	
     	
@@ -98,11 +98,11 @@ public class GroupHardcore extends JavaPlugin {
     	return commandHandler.onCommand(sender, command, label, args);
     }    
     
-    public void WorldEnd() {
+    public void worldEnd() {
     	
     	Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
 		    public void run() {
-		    	worldEndEvent.StartEvent();
+		    	worldEndEvent.startEvent();
 		    }
 		 }, worldEndStartDelay);
     	
