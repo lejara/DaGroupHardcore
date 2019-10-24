@@ -15,34 +15,22 @@ import net.md_5.bungee.api.ChatColor;
 public class LivesManager {
 		
 	public int currentLives = 0;
-	public int lives = 3;
-	public boolean worldFailed = false;
 	GroupHardcore main;
-	ScorebroadTracker scorebroadTrack;
 	
-	public LivesManager(int numberOfLives, boolean wf, GroupHardcore m){
-		lives = numberOfLives;
-		currentLives = lives;
-		main = m;
-		worldFailed = wf;
-	}
-	
-	public LivesManager(int numberOfLives, boolean wf, int currentNumLive, GroupHardcore m){
-		lives = numberOfLives;
+	public LivesManager(int currentNumLive, GroupHardcore m){
 		currentLives = currentNumLive;
 		main = m;
-		worldFailed = wf;
 	}
 	
 	public void setLives(int l) {
-		lives = l;
-		resetLives();		
+		currentLives = l;	
+		main.scoreTracker.updateScoreBoardOfLives();
+		main.saveToConfig(main.currentWorld);
 	}
 	
 	public void resetLives() {
-		currentLives = lives;
-		worldFailed = false;
-		scorebroadTrack.updateScoreBoardOfLives();		
+		currentLives = main.defualtNumberOfLives;		
+		main.scoreTracker.updateScoreBoardOfLives();		
 		main.saveToConfig(main.currentWorld);
 	}
 	
@@ -52,7 +40,7 @@ public class LivesManager {
 			lose();
 			currentLives = 0;
 		}		
-		scorebroadTrack.updateScoreBoardOfLives();		
+		main.scoreTracker.updateScoreBoardOfLives();		
 		main.saveToConfig(player);
 	}
 	
@@ -76,17 +64,8 @@ public class LivesManager {
 //	}	
 	
 	private void lose() {
-		Bukkit.broadcastMessage(ChatColor.RED + "All Lives Are Gone!");
-		worldFailed = true;						
-		if(main.doWorldEndEvent) {
-			main.worldEnd();
-		}
-		else {
-			for (Player p : Bukkit.getOnlinePlayers()) {			
-				p.kickPlayer("Hardcore Failed, no more lives");
-			}
-		}
-
+		Bukkit.broadcastMessage(ChatColor.RED + "Failed, All Lives Are Gone!");
+		main.worldEnd();
 	}		
 	
 }

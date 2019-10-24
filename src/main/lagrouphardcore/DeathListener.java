@@ -19,14 +19,16 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 public class DeathListener implements Listener{
     
 	private LivesManager lives;
+	private GroupHardcore main;
 	
-	public DeathListener(LivesManager l) {
+	public DeathListener(LivesManager l, GroupHardcore m) {
 		lives = l;
+		main = m;
 	}
 	
     @EventHandler
 	public void onPlayerDeath(PlayerDeathEvent event) {
-    	if(!lives.worldFailed) {
+    	if(!main.worldFailed) {
     		event.setDeathMessage(event.getEntity().getDisplayName() + " has Died, lost one life");	
     		
         	lives.loseALive(event.getEntity());

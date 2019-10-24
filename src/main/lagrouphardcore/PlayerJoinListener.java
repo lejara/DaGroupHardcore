@@ -17,18 +17,18 @@ import org.bukkit.event.player.PlayerJoinEvent;
 public class PlayerJoinListener implements Listener {
 
 	
-	private LivesManager lives;
+	private GroupHardcore main;
 	private ScorebroadTracker scoreTracker;
 	
-	public PlayerJoinListener(LivesManager l, ScorebroadTracker t) {
-		lives = l;
+	public PlayerJoinListener(GroupHardcore m, ScorebroadTracker t) {
+		main = m;
 		scoreTracker = t;
 	}
 	
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event)
     {
-    	if(!lives.worldFailed) {
+    	if(!main.worldFailed) {
     		scoreTracker.setScoreBoardToPlayer(event.getPlayer());
             event.setJoinMessage("Welcome to da hardcore, " + event.getPlayer().getName());
     	}

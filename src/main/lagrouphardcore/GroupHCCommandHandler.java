@@ -18,11 +18,13 @@ import net.md_5.bungee.api.ChatColor;
 public class GroupHCCommandHandler {
 	
 	private LivesManager lives;
+	private DaysTracker dayTrack;
 	private GroupHardcore main;
 	
-	public GroupHCCommandHandler(LivesManager livesMana, GroupHardcore m) {
+	public GroupHCCommandHandler(LivesManager livesMana, DaysTracker day, GroupHardcore m) {
 		lives = livesMana;
 		main = m;
+		dayTrack = day;
 	}
 	
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
@@ -30,8 +32,11 @@ public class GroupHCCommandHandler {
 		if (command.getName().equalsIgnoreCase("setlives")) {
 			return setLives(sender, args);
         }
-		else if(command.getName().equalsIgnoreCase("resetlives")) {
-			return resetLives(sender);
+		else if(command.getName().equalsIgnoreCase("reset")) {
+			return reset(sender);
+		}
+		else if(command.getName().equalsIgnoreCase("setdays")) {
+			return setDays(sender, args);
 		}
 		else if(command.getName().equalsIgnoreCase("setworldend")) {
 			return setWorldEndEvent(sender, args);
@@ -67,9 +72,32 @@ public class GroupHCCommandHandler {
 		return false;		
 	}	
 	
-	public boolean resetLives(CommandSender sender) {
-		sender.sendMessage("Lives has been reset");
-		lives.resetLives();
+	public boolean setDays(CommandSender sender, String[] args) {
+		if(args.length == 1) {				
+			try {
+				int num = Integer.parseInt(args[0]);
+				if (num < 1) {
+					sender.sendMessage("Error number must be grater or equal to 1");
+				}
+				else {
+					dayTrack.setDays(num);
+					sender.sendMessage("Days Set to " + args[0]);
+					return true;
+				}										
+	            
+			}catch(NumberFormatException e) {
+				sender.sendMessage("Error arg1 must be a whole number");
+			}
+		}
+		else {
+			sender.sendMessage("Error number of args, must be one");
+		}
+		return false;		
+	}	
+	
+	public boolean reset(CommandSender sender) {		
+		main.reset();
+		sender.sendMessage("Data Reseted");
 		return true;
 	}
 	
