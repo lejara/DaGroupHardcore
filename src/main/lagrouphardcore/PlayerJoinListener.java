@@ -18,16 +18,18 @@ public class PlayerJoinListener implements Listener {
 
 	
 	private LivesManager lives;
+	private ScorebroadTracker scoreTracker;
 	
-	public PlayerJoinListener(LivesManager l) {
+	public PlayerJoinListener(LivesManager l, ScorebroadTracker t) {
 		lives = l;
+		scoreTracker = t;
 	}
 	
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event)
     {
     	if(!lives.worldFailed) {
-        	lives.setScoreBoardOfLives(event.getPlayer());
+    		scoreTracker.setScoreBoardToPlayer(event.getPlayer());
             event.setJoinMessage("Welcome to da hardcore, " + event.getPlayer().getName());
     	}
     	else {
