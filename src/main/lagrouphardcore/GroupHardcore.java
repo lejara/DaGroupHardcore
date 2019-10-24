@@ -53,6 +53,7 @@ public class GroupHardcore extends JavaPlugin {
     	    	
     	getServer().getPluginManager().registerEvents(new DeathListener(livesManager), this);
     	getServer().getPluginManager().registerEvents(new PlayerJoinListener(livesManager, scoreTracker), this);
+    	getServer().getPluginManager().registerEvents(new EnderDragonEventListener(this), this);
     	    	
     }
     @Override
@@ -124,4 +125,8 @@ public class GroupHardcore extends JavaPlugin {
     	
     	
     } 
+    
+    public void worldWin() {
+    	System.out.print("World has been Won");
+    }
 }
