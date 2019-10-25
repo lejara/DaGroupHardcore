@@ -16,7 +16,7 @@ Or else the world will end!
 
 The world will end and all players will be kicked, server will lockout any players that try to join the server
 
-There is a world end event that casuse tnt, lava and mobs to spawn to each player at a interval.
+There is a world end event that casuse tnt, lava and mobs to spawn to each player at a interval. Then drops all players to the abyss
 
 NOTE: The world end event is set to off by defualt since it may cuase lag to the server. Command to turn it on is down below
 
