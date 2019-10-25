@@ -1,7 +1,7 @@
 # LaGroupHardcore 1.1
 A spigot server plugin
 
-Minecraft group hardcore, with a shared pool of lives, and a day timer for all players 
+Minecraft group hardcore, with a shared pool of lives, and a day timer for all players on your server!
 
 ## Objective
 You have a set number of lives and days shared with all players.
