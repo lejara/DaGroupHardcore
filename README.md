@@ -6,7 +6,6 @@ Minecraft group hardcore, with a shared pool of lives, and a day timer for all p
 Days and Lives are displayed on a scorebroad.
 
 ## Objective
-You have a set number of lives and days shared with all players.
 
 Your goal is to kill the ender dragon before you run out of days or lives! 
 
