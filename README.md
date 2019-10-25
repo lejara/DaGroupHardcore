@@ -17,7 +17,7 @@ All players will be kicked, server will lockout any players that try to join the
 
 There is a world end event that casuse tnt, lava and mobs to spawn to each player at a interval. Then drops all players to the abyss
 
-*NOTE: The world end event is set to off by defualt since it may cuase lag to the server. Command to turn it on is down below*
+*NOTE: The world end event is set to off by defualt since it may cuase lag to the server. Command to turn it on is [here](https://github.com/lejara/LaGroupHardcore/blob/master/README.md#setworldend-0--1)*
 
 
 ## Commands
