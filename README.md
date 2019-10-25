@@ -10,8 +10,7 @@ Your goal is to kill the ender dragon before you run out of days or lives!
 
 Or else the world will end!
 
-### On Failed
-When lives or days are out...
+### When lives or days are out...
 
 The world will end and all players will be kicked.
 
@@ -38,7 +37,7 @@ Note: this will not roll back any block changes casued by the world end event.
    
 ### /setworldend [0 | 1]
 
-Sets the world end event to happend when you failed the hardcore.
+Sets the world end event to happend when you fail the hardcore.
 
 Beware: TNT explosions, Lava, Ghast Explosions, Players spawn point will be change to the abyss
 
