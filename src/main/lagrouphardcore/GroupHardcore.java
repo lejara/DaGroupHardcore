@@ -148,7 +148,7 @@ public class GroupHardcore extends JavaPlugin {
     
     public void worldWin() {
     	deactivate();
-    	Bukkit.broadcastMessage(ChatColor.GREEN + "You Have Won LaGroupHardcore!");    	
+    	Bukkit.broadcastMessage(ChatColor.GREEN + "You Have Won The Hardcore!");    	
     }
     
     public void deactivate() {

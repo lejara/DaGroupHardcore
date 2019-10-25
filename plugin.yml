@@ -20,12 +20,12 @@ commands:
     permission: lagrouphardcore.mycommand
     permission-message: You don't have the LaGroupHardcore.setlives permission
   setworldend:
-    description: Sets the world end event to happend after you have failed the hardcore world
+    description: Sets the world end event to happend when you fail the hardcore
     usage: /setworldend {[0] | [1]]}
     permission: lagrouphardcore.mycommand
     permission-message: You don't have the LaGroupHardcore.setlives permission
   resetplayerspawn:
-    description: resets all online players spawn point
+    description: resets all online players spawn point to the world spawn point
     usage: /resetplayerspawn
     permission: lagrouphardcore.mycommand
     permission-message: You don't have the LaGroupHardcore.setlives permission     
