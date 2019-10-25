@@ -162,7 +162,7 @@ public class WorldEndEvent {
     	Bukkit.getScheduler().scheduleSyncDelayedTask(main, new Runnable() {
 		    public void run() {
 				for (Player p : Bukkit.getOnlinePlayers()) {			
-					p.kickPlayer("Hardcore Failed, no more lives");
+					p.kickPlayer("Hardcore Failed!");
 				}
 		    	
 		    }

@@ -21,8 +21,9 @@ public class ScorebroadTracker {
         Scoreboard board = Bukkit.getScoreboardManager().getNewScoreboard();
         Objective obj = board.registerNewObjective("LivesObj", "life", "----");
         obj.setDisplaySlot(DisplaySlot.SIDEBAR); 
-                
+        
         obj.getScore("Days Left: ").setScore(daysTrack.daysLeft);
+        
         obj.getScore("Lives: ").setScore(lives.currentLives);
         
         player.setScoreboard(board);
@@ -41,5 +42,11 @@ public class ScorebroadTracker {
 			board.getObjective("LivesObj").getScore("Days Left: ").setScore(daysTrack.daysLeft);
 		}
 	}	
+	
+	public void clearScoreBoard() {
+		for (Player p : Bukkit.getOnlinePlayers()) {
+			p.setScoreboard(Bukkit.getScoreboardManager().getNewScoreboard());			
+		}
+	}
 	
 }

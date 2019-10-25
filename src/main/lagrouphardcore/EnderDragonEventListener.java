@@ -15,7 +15,7 @@ public class EnderDragonEventListener implements Listener {
 	@EventHandler
 	public void onDragonPhaseChangeEvent(EnderDragonChangePhaseEvent event) {
 		
-		if(event.getNewPhase() ==  Phase.DYING) {
+		if(event.getNewPhase() ==  Phase.DYING && main.active) {
 			main.worldWin();
 		}
 	}

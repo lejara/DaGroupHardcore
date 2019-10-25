@@ -28,11 +28,11 @@ public class PlayerJoinListener implements Listener {
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event)
     {
-    	if(!main.worldFailed) {
+    	if(!main.worldFailed && main.active) {
     		scoreTracker.setScoreBoardToPlayer(event.getPlayer());
             event.setJoinMessage("Welcome to da hardcore, " + event.getPlayer().getName());
     	}
-    	else {
+    	else if(main.worldFailed)  {
     		event.getPlayer().kickPlayer("Hardcore on this world has failed");
     	}
 

@@ -28,7 +28,7 @@ public class DeathListener implements Listener{
 	
     @EventHandler
 	public void onPlayerDeath(PlayerDeathEvent event) {
-    	if(!main.worldFailed) {
+    	if(!main.worldFailed && lives.active) {
     		event.setDeathMessage(event.getEntity().getDisplayName() + " has Died, lost one life");	
     		
         	lives.loseALive(event.getEntity());

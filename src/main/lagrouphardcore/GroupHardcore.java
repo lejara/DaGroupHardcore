@@ -25,17 +25,18 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import net.md_5.bungee.api.ChatColor;
+
 
 
 public class GroupHardcore extends JavaPlugin {
 	
 	boolean worldFailed = false;
 	boolean doWorldEndEvent = false;
-	boolean livesCounterActive = true;
-	boolean daysCounterActive = true;
+	boolean active = true;
 	int defualtNumberOfLives = 5;	
 	int defualtNumberOfDays = 15;
-	Long worldEndStartDelay = 180L;
+	Long worldEndStartDelay = 80L;
 	
 	World currentWorld;
 	
@@ -57,7 +58,10 @@ public class GroupHardcore extends JavaPlugin {
     	getServer().getPluginManager().registerEvents(new DeathListener(livesManager, this), this);
     	getServer().getPluginManager().registerEvents(new PlayerJoinListener(this, scoreTracker), this);
     	getServer().getPluginManager().registerEvents(new EnderDragonEventListener(this), this);
-    	    	
+    	
+    	if(!active) {
+    		deactivate();
+    	}
     }
     @Override
     public void onDisable() {
@@ -69,11 +73,12 @@ public class GroupHardcore extends JavaPlugin {
     
     public void saveToConfig(World world) {    	
     	
+    	this.getConfig().set("WorldID", world.getUID().hashCode()); 
     	this.getConfig().set("DoWorldEndEvent", doWorldEndEvent);
-    	this.getConfig().set("CurrentLives", livesManager.currentLives);
-    	this.getConfig().set("WorldID", world.getUID().hashCode());    	
+    	this.getConfig().set("CurrentLives", livesManager.currentLives);    	   	
     	this.getConfig().set("WorldFailed", worldFailed);
     	this.getConfig().set("DaysLeft", days.daysLeft);
+    	this.getConfig().set("HardcoreActive", active);
     	
     	this.saveConfig();
     	
@@ -96,6 +101,8 @@ public class GroupHardcore extends JavaPlugin {
     		doWorldEndEvent = this.getConfig().getBoolean("DoWorldEndEvent");    		
     		livesManager = new LivesManager(gotCurrentLives, this);
     		days = new DaysTracker(this, daysLeft);
+    		active = this.getConfig().getBoolean("HardcoreActive");
+    		
     	}
     	else {    		
     		System.out.print("[LaGroupHardcore] Did not load Config and Data, will load defaults");
@@ -131,7 +138,7 @@ public class GroupHardcore extends JavaPlugin {
 			Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
 			    public void run() {
 					for (Player p : Bukkit.getOnlinePlayers()) {			
-						p.kickPlayer("Hardcore Failed, no more lives");
+						p.kickPlayer("Hardcore Failed!");
 					}
 			    }
 			 }, worldEndStartDelay);
@@ -140,12 +147,28 @@ public class GroupHardcore extends JavaPlugin {
     } 
     
     public void worldWin() {
-    	System.out.print("World has been Won");
+    	deactivate();
+    	Bukkit.broadcastMessage(ChatColor.GREEN + "You Have Won LaGroupHardcore!");    	
+    }
+    
+    public void deactivate() {
+    	System.out.print("[LaGroupHardcore] Deactivating LaGroupHardcore");
+    	active = false;
+    	scoreTracker.clearScoreBoard();
+    	days.deactivate();
+    	livesManager.deactivate();
+    	saveToConfig(currentWorld);
     }
     
     public void reset() {
+    	System.out.print("[LaGroupHardcore] Plugin Data Reseted");
     	worldFailed = false;
-    	livesManager.resetLives();
-    	days.resetDays();
+    	active = true;    	
+    	for (Player p : Bukkit.getOnlinePlayers()) {
+    		scoreTracker.setScoreBoardToPlayer(p);
+    	}    	    	
+    	livesManager.reset(false);
+    	days.reset(false);
+    	saveToConfig(currentWorld);
     }
 }

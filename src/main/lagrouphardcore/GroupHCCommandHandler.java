@@ -97,7 +97,7 @@ public class GroupHCCommandHandler {
 	
 	public boolean reset(CommandSender sender) {		
 		main.reset();
-		sender.sendMessage("Data Reseted");
+		sender.sendMessage("LaGroupHardcore Plugin Data Reseted");
 		return true;
 	}
 	
