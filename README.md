@@ -1,4 +1,4 @@
-# LaGroupHardcore
+# LaGroupHardcore 1.1
 A spigot server plugin
 
 Minecraft group hardcore, with a shared pool of lives, and a day timer for all players 
