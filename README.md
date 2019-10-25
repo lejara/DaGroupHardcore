@@ -13,7 +13,7 @@ Or else the world will end!
 
 ### When lives or days are out...
 
-The world will end and all players will be kicked, server will lockout any players that try to join the server
+All players will be kicked, server will lockout any players that try to join the server
 
 There is a world end event that casuse tnt, lava and mobs to spawn to each player at a interval. Then drops all players to the abyss
 
