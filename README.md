@@ -1,2 +1,2 @@
 # LaGroupHardcore
-Minecraft group hardcore, with a shared pool of lives. A spigot server plugin
+Minecraft group hardcore, with a shared pool of lives, and a day timer. A spigot server plugin
