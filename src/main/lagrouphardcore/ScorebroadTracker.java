@@ -21,14 +21,16 @@ public class ScorebroadTracker {
 	
 	public void setScoreBoardToPlayer(Player player) {
         Scoreboard board = Bukkit.getScoreboardManager().getNewScoreboard();
-        Objective obj = board.registerNewObjective("LivesObj", "life", ChatColor.DARK_RED + "-------");
+        
+        Objective obj = board.registerNewObjective("LivesObj", "life", 
+        		ChatColor.DARK_RED.toString() 
+        		+ ChatColor.BOLD.toString() 
+        		+ "GROUP HARDCORE");
+        
         obj.setDisplaySlot(DisplaySlot.SIDEBAR); 
         
-        obj.getScore(" ").setScore(4);
-        obj.getScore(" Lives: " + ChatColor.GREEN +lives.currentLives + "    ").setScore(3);
-        obj.getScore("  ").setScore(2);
-        obj.getScore(" Days Left: " + ChatColor.GREEN +daysTrack.daysLeft + " ").setScore(1);   
-        obj.getScore("   ").setScore(0);
+        obj.getScore(" Lives: " + ChatColor.GREEN +lives.currentLives + "   ").setScore(1);       
+        obj.getScore(" Days Left: " + ChatColor.GREEN +daysTrack.daysLeft + " ").setScore(0);   
         
         player.setScoreboard(board);
 	}

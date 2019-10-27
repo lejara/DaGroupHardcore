@@ -19,6 +19,7 @@ package main.lagrouphardcore;
 
 
 import org.bukkit.Bukkit;
+import org.bukkit.Difficulty;
 import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -34,8 +35,8 @@ public class GroupHardcore extends JavaPlugin {
 	boolean worldFailed = false;
 	boolean doWorldEndEvent = false;
 	boolean active = true;
-	int defualtNumberOfLives = 5;	
-	int defualtNumberOfDays = 15;
+	int defualtNumberOfLives = 4;	
+	int defualtNumberOfDays = 12;
 	Long worldEndStartDelay = 80L;
 	
 	World currentWorld;
@@ -50,7 +51,7 @@ public class GroupHardcore extends JavaPlugin {
     public void onEnable() {
     	        	
     	loadFromConfig();
-    	    	    	
+    	currentWorld.setDifficulty(Difficulty.HARD);    	    	
     	worldEndEvent = new WorldEndEvent(this);
     	scoreTracker = new ScorebroadTracker(livesManager, days);
     	commandHandler = new GroupHCCommandHandler(livesManager, days, this);

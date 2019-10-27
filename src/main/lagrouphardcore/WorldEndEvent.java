@@ -45,8 +45,6 @@ public class WorldEndEvent {
     	spawnBaddies(80L);
     	//Spawn Primed TNT, and lava below the player in 5 secs
     	spawnExplo(100L);
-    	//Spawn mobs 
-    	spawnBaddies(120L);
     	//Spawn Primed TNT, and lava below the player in 15 secs
     	spawnExplo(300L);
     	//Spawn Primed TNT, and lava below the player in 25 secs
