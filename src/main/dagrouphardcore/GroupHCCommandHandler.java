@@ -6,7 +6,7 @@
 * 
 */
 
-package main.lagrouphardcore;
+package main.dagrouphardcore;
 
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -97,7 +97,7 @@ public class GroupHCCommandHandler {
 	
 	public boolean reset(CommandSender sender) {		
 		main.reset();
-		sender.sendMessage("LaGroupHardcore Plugin Data Reseted");
+		sender.sendMessage("DaGroupHardcore Plugin Data Reseted");
 		return true;
 	}
 	

@@ -7,7 +7,7 @@
 * 
 */
 
-package main.lagrouphardcore;
+package main.dagrouphardcore;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;

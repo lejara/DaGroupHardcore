@@ -1,5 +1,5 @@
-main: main.lagrouphardcore.GroupHardcore
-name: LaGroupHardcore
+main: main.dagrouphardcore.GroupHardcore
+name: DaGroupHardcore
 version: 1.1
 author: lejara
 description: Hardcore minecraft using a pool of lives
@@ -7,25 +7,25 @@ commands:
   setlives:
     description: Set the number of lives
     usage: /setlives [numOfLives]
-    permission: lagrouphardcore.mycommand
-    permission-message: You don't have the LaGroupHardcore.setlives permission.
+    permission: dagrouphardcore.mycommand
+    permission-message: You don't have the DaGroupHardcore.setlives permission.
   setdays:
     description: Set the number of days
     usage: /setdays [numOfdays]
-    permission: lagrouphardcore.mycommand
-    permission-message: You don't have the LaGroupHardcore.setlives permission.  
+    permission: dagrouphardcore.mycommand
+    permission-message: You don't have the DaGroupHardcore.setlives permission.  
   reset:
     description: Resets the current number of lives
     usage: /resetlives
-    permission: lagrouphardcore.mycommand
-    permission-message: You don't have the LaGroupHardcore.setlives permission
+    permission: dagrouphardcore.mycommand
+    permission-message: You don't have the DaGroupHardcore.setlives permission
   setworldend:
     description: Sets the world end event to happend when you fail the hardcore
     usage: /setworldend {[0] | [1]]}
-    permission: lagrouphardcore.mycommand
-    permission-message: You don't have the LaGroupHardcore.setlives permission
+    permission: dagrouphardcore.mycommand
+    permission-message: You don't have the DaGroupHardcore.setlives permission
   resetplayerspawn:
     description: resets all online players spawn point to the world spawn point
     usage: /resetplayerspawn
-    permission: lagrouphardcore.mycommand
-    permission-message: You don't have the LaGroupHardcore.setlives permission     
+    permission: dagrouphardcore.mycommand
+    permission-message: You don't have the DaGroupHardcore.setlives permission     
