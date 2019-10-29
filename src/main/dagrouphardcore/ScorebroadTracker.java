@@ -1,4 +1,4 @@
-package main.lagrouphardcore;
+package main.dagrouphardcore;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -25,7 +25,7 @@ public class ScorebroadTracker {
         Objective obj = board.registerNewObjective("LivesObj", "life", 
         		ChatColor.DARK_RED.toString() 
         		+ ChatColor.BOLD.toString() 
-        		+ "GROUP HARDCORE");
+        		+ "DaGroupHardcore");
         
         obj.setDisplaySlot(DisplaySlot.SIDEBAR); 
         

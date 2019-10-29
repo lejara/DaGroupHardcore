@@ -15,7 +15,7 @@
 * 
 */
 
-package main.lagrouphardcore;
+package main.dagrouphardcore;
 
 
 import org.bukkit.Bukkit;
@@ -51,7 +51,7 @@ public class GroupHardcore extends JavaPlugin {
     public void onEnable() {
     	        	
     	loadFromConfig();
-    	currentWorld.setDifficulty(Difficulty.HARD);    	    	
+    	currentWorld.setDifficulty(Difficulty.HARD);
     	worldEndEvent = new WorldEndEvent(this);
     	scoreTracker = new ScorebroadTracker(livesManager, days);
     	commandHandler = new GroupHCCommandHandler(livesManager, days, this);
@@ -83,7 +83,7 @@ public class GroupHardcore extends JavaPlugin {
     	
     	this.saveConfig();
     	
-    	System.out.print("[LaGroupHardcore] Config and Data Saved");
+    	System.out.print("[DaGroupHardcore] Config and Data Saved");
     }
     
     public void loadFromConfig() {
@@ -93,7 +93,7 @@ public class GroupHardcore extends JavaPlugin {
     	
     	if(getWorldID != 0 && getWorldID == currentWorld.getUID().hashCode()) {
     		
-    		System.out.print("[LaGroupHardcore] Loaded Config and Data, World UID Hash: " + currentWorld.getUID().hashCode());
+    		System.out.print("[DaGroupHardcore] Loaded Config and Data, World UID Hash: " + currentWorld.getUID().hashCode());
     		
     		int gotCurrentLives = this.getConfig().getInt("CurrentLives");
     		int daysLeft = this.getConfig().getInt("DaysLeft");
@@ -106,7 +106,7 @@ public class GroupHardcore extends JavaPlugin {
     		
     	}
     	else {    		
-    		System.out.print("[LaGroupHardcore] Did not load Config and Data, will load defaults");
+    		System.out.print("[DaGroupHardcore] Did not load Config and Data, will load defaults");
     		livesManager = new LivesManager(defualtNumberOfLives, this);
     		days = new DaysTracker(this, defualtNumberOfDays);
     		saveToConfig(this.getServer().getWorlds().get(0));
@@ -153,7 +153,7 @@ public class GroupHardcore extends JavaPlugin {
     }
     
     public void deactivate() {
-    	System.out.print("[LaGroupHardcore] Deactivating LaGroupHardcore");
+    	System.out.print("[DaGroupHardcore] Deactivating DaGroupHardcore");
     	active = false;
     	scoreTracker.clearScoreBoard();
     	days.deactivate();
@@ -162,7 +162,7 @@ public class GroupHardcore extends JavaPlugin {
     }
     
     public void reset() {
-    	System.out.print("[LaGroupHardcore] Plugin Data Reseted");
+    	System.out.print("[DaGroupHardcore] Plugin Data Reseted");
     	worldFailed = false;
     	active = true;    	
     	for (Player p : Bukkit.getOnlinePlayers()) {
