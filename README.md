@@ -1,3 +1,6 @@
+## Download
+Spogit : https://www.spigotmc.org/resources/dagrouphardcore.72389/
+
 # DaGroupHardcore 1.1
 A spigot server plugin
 
@@ -11,5 +14,3 @@ Your goal is to kill the ender dragon before you run out of days or lives!
 
 Or else the world will end!
 
-## Download
-Spogit : https://www.spigotmc.org/resources/dagrouphardcore.72389/
