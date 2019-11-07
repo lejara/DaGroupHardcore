@@ -1,12 +1,13 @@
 package main.dagrouphardcore;
 
 import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 
 import net.md_5.bungee.api.ChatColor;
 
 public class DaysTracker {
 
-	public int daysLeft;
+	public Integer daysLeft;
 	public boolean active;
 	private int taskID;
 	private GroupHardcore main;
@@ -18,7 +19,7 @@ public class DaysTracker {
 		main = m;
 		active = true;
 		startDayChecker();
-	}
+	}	
 	
 	public void startDayChecker() {
 		
@@ -37,7 +38,7 @@ public class DaysTracker {
             
             }
         }, 0, dayCheckPeriod); 
-	}
+	}	
 	
 	public void dayPassed() {		
 		daysLeft--;
@@ -45,7 +46,11 @@ public class DaysTracker {
 			lose();
 		}
 		else {
-			Bukkit.broadcastMessage("A Day Has Passed...");
+			//Bukkit.broadcastMessage("A Day Has Passed...");
+			for (Player p : Bukkit.getOnlinePlayers()) {
+				p.sendTitle(ChatColor.DARK_RED + "A Day Has Passed...",
+						" ", 8, 80, 70);
+			}
 		}
 		main.scoreTracker.updateScoreBoardOfDaysLeft();	
 		main.saveToConfig(main.currentWorld);
@@ -81,7 +86,7 @@ public class DaysTracker {
 	}
 	
 	private void lose() {
-		Bukkit.broadcastMessage(ChatColor.RED + "Failed, No More Days!");
+		System.out.print(ChatColor.RED + "Failed, No More Days!");
 		main.worldEnd();
 	}
 	

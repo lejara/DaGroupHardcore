@@ -8,7 +8,6 @@
 
 package main.dagrouphardcore;
 
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import net.md_5.bungee.api.ChatColor;
 
@@ -49,7 +48,6 @@ public class LivesManager {
 		currentLives--;
 		if(currentLives < 0) {
 			lose();
-			currentLives = 0;
 		}		
 		main.scoreTracker.updateScoreBoardOfLives();		
 		main.saveToConfig(player);
@@ -60,7 +58,7 @@ public class LivesManager {
 	}
 	
 	private void lose() {
-		Bukkit.broadcastMessage(ChatColor.RED + "Failed, All Lives Are Gone!");
+		System.out.print(ChatColor.RED + "Failed, All Lives Are Gone!");
 		main.worldEnd();
 	}		
 	

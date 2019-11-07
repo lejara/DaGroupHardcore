@@ -29,24 +29,37 @@ public class ScorebroadTracker {
         
         obj.setDisplaySlot(DisplaySlot.SIDEBAR); 
         
-        obj.getScore(" Lives: " + ChatColor.GREEN +lives.currentLives + "   ").setScore(1);       
-        obj.getScore(" Days Left: " + ChatColor.GREEN +daysTrack.daysLeft + " ").setScore(0);   
+        if(lives.currentLives < 0) {
+        	obj.getScore(" Lives: " + ChatColor.RED + "OUT!" + "   ").setScore(1); 
+        }
+        else if(lives.currentLives == 0) {
+        	obj.getScore(" Lives: " + ChatColor.YELLOW + lives.currentLives + "   ").setScore(1); 
+        }
+        else {
+        	obj.getScore(" Lives: " + ChatColor.GREEN + lives.currentLives + "   ").setScore(1); 
+        }
+        
+        if(daysTrack.daysLeft == 0) {
+        	obj.getScore(" Days Left: " + ChatColor.RED + "OUT!" + " ").setScore(0);
+        }
+        else if(daysTrack.daysLeft == 1) {
+        	obj.getScore(" Days Left: " + ChatColor.YELLOW + daysTrack.daysLeft + " ").setScore(0);
+        }
+        else {
+        	obj.getScore(" Days Left: " + ChatColor.GREEN + daysTrack.daysLeft + " ").setScore(0);
+        }
         
         player.setScoreboard(board);
 	}
 	
 	public void updateScoreBoardOfLives() {
 		for (Player p : Bukkit.getOnlinePlayers()) {
-//			Scoreboard board = p.getScoreboard();
-//			board.getObjective("LivesObj").getScore("Lives: ").setScore(lives.currentLives);
 			setScoreBoardToPlayer(p);
 		}
 	}	
 	
 	public void updateScoreBoardOfDaysLeft() {
 		for (Player p : Bukkit.getOnlinePlayers()) {
-//			Scoreboard board = p.getScoreboard();
-//			board.getObjective("LivesObj").getScore("Days Left: ").setScore(daysTrack.daysLeft);
 			setScoreBoardToPlayer(p);
 		}
 	}	

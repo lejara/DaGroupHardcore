@@ -34,7 +34,9 @@ public class WorldEndEvent {
 	}
 	
 	public void startEvent() {
-		Bukkit.broadcastMessage(ChatColor.RED + "World Will Now End. >:)");
+    	for (Player p : Bukkit.getOnlinePlayers()) {
+			p.sendTitle(ChatColor.DARK_RED.toString() + "WORLD WILL NOW END! >:(", " " , 8, 40, 20);
+		}
     	World world = main.getServer().getWorlds().get(0);
     	
     	world.setTime(13000);

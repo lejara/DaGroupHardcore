@@ -37,7 +37,7 @@ public class GroupHardcore extends JavaPlugin {
 	boolean active = true;
 	int defualtNumberOfLives = 4;	
 	int defualtNumberOfDays = 12;
-	Long worldEndStartDelay = 80L;
+	Long worldEndStartDelay = 140L;
 	
 	World currentWorld;
 	
@@ -126,7 +126,15 @@ public class GroupHardcore extends JavaPlugin {
     
     public void worldEnd() {
     	worldFailed = true;
-    	    	
+    	
+    	days.deactivate();
+    	livesManager.deactivate();
+    	scoreTracker.clearScoreBoard();
+    	
+    	for (Player p : Bukkit.getOnlinePlayers()) {
+			p.sendTitle(ChatColor.DARK_RED.toString() + ChatColor.BOLD.toString() + "HARDCORE FAILED!", " " , 8, (int)(worldEndStartDelay - 20), 20);
+		}
+    	
 		if(doWorldEndEvent) {
 	    	Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
 			    public void run() {
@@ -144,12 +152,14 @@ public class GroupHardcore extends JavaPlugin {
 			    }
 			 }, worldEndStartDelay);
 			
-		}    	    
+		} 
     } 
     
     public void worldWin() {
     	deactivate();
-    	Bukkit.broadcastMessage(ChatColor.GREEN + "You Have Won DaGroupHardcore! XD");    	
+    	for (Player p : Bukkit.getOnlinePlayers()) {
+			p.sendTitle(ChatColor.GREEN.toString() + ChatColor.BOLD.toString() + "YOU WON THE HARDCORE! XD", " " , 8, 40, 20);
+		}  	
     }
     
     public void deactivate() {
