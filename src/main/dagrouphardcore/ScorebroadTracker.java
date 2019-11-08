@@ -33,20 +33,15 @@ public class ScorebroadTracker {
 	        
 	        obj.setDisplaySlot(DisplaySlot.SIDEBAR); 
 	        
-	        if(lives.currentLives < 0) {
-	        	obj.getScore(" Lives: " + ChatColor.RED + "OUT!").setScore(1); 
-	        }
-	        else if(lives.currentLives == 0) {
+	        if(lives.currentLives == 0) {
 	        	obj.getScore(" Lives: " + ChatColor.YELLOW + lives.currentLives).setScore(1); 
 	        }
 	        else {
 	        	obj.getScore(" Lives: " + ChatColor.GREEN + lives.currentLives).setScore(1); 
 	        }
 	        
-	        if(daysTrack.daysLeft == 0) {
-	        	obj.getScore(" Days Left: " + ChatColor.RED + "OUT!").setScore(0);
-	        }
-	        else if(daysTrack.daysLeft == 1) {
+
+	        if(daysTrack.daysLeft == 1) {
 	        	obj.getScore(" Days Left: " + ChatColor.YELLOW + daysTrack.daysLeft ).setScore(0);
 	        }
 	        else {

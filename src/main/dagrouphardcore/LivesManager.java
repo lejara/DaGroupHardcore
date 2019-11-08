@@ -56,8 +56,8 @@ public class LivesManager {
 			//main.scoreTracker.updateScoreBoardOfLives(); //sendTitleWihoutScoreBoard() calls an redraw to the score board, leaving this out for now
 			for (Player p : Bukkit.getOnlinePlayers()) {
 				main.scoreTracker.sendTitleWihoutScoreBoard(p, 
-						ChatColor.BLUE + player.getDisplayName() + ChatColor.BLUE +" has Died!", "Lost one life." , 
-						8, 80, 70);
+						ChatColor.GRAY + player.getDisplayName() + ChatColor.GRAY +" has Died!", ChatColor.GRAY + "Lost one life." , 
+						8, 50, 70);
 				
 				//Play lost live sound mix
     			p.playSound(p.getLocation(), Sound.AMBIENT_CAVE, 10, 6);

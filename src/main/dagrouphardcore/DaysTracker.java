@@ -49,8 +49,8 @@ public class DaysTracker {
 		if(active) {		
 //			main.scoreTracker.updateScoreBoardOfDaysLeft(); //sendTitleWihoutScoreBoard() calls a redraw  to the score board, leaving this out for now.
 			for (Player p : Bukkit.getOnlinePlayers()) {
-				main.scoreTracker.sendTitleWihoutScoreBoard(p, ChatColor.BLUE + "A Day Has Passed...",
-						" ", 8, 80, 70);
+				main.scoreTracker.sendTitleWihoutScoreBoard(p, ChatColor.GRAY + "A Day Has Passed...",
+						" ", 8, 50, 70);
 			}						
 			main.saveToConfig(main.currentWorld);
 		}
