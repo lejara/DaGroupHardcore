@@ -22,6 +22,7 @@ public class DaysTracker {
 	}	
 	
 	public void startDayChecker() {
+		active = true;
 		taskID = Bukkit.getScheduler().scheduleSyncRepeatingTask(main, new Runnable() {
             @Override
             public void run() {
@@ -44,14 +45,13 @@ public class DaysTracker {
 		if(daysLeft == 0) {
 			lose();
 		}
-		else {			
+
+		if(active) {		
+//			main.scoreTracker.updateScoreBoardOfDaysLeft(); //sendTitleWihoutScoreBoard() calls a redraw  to the score board, leaving this out for now.
 			for (Player p : Bukkit.getOnlinePlayers()) {
-				p.sendTitle(ChatColor.DARK_RED + "A Day Has Passed...",
+				main.scoreTracker.sendTitleWihoutScoreBoard(p, ChatColor.BLUE + "A Day Has Passed...",
 						" ", 8, 80, 70);
-			}
-		}
-		if(active) {
-			main.scoreTracker.updateScoreBoardOfDaysLeft();	
+			}						
 			main.saveToConfig(main.currentWorld);
 		}
 	}

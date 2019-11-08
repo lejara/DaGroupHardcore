@@ -54,7 +54,7 @@ public class GroupHardcore extends JavaPlugin {
     	loadFromConfig();
     	currentWorld.setDifficulty(Difficulty.HARD);
     	worldEndEvent = new WorldEndEvent(this);
-    	scoreTracker = new ScorebroadTracker(livesManager, days);
+    	scoreTracker = new ScorebroadTracker(livesManager, days, this);
     	commandHandler = new GroupHCCommandHandler(livesManager, days, this);
     	    	
     	getServer().getPluginManager().registerEvents(new DeathListener(livesManager, this), this);

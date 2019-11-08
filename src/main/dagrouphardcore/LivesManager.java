@@ -8,7 +8,11 @@
 
 package main.dagrouphardcore;
 
+import org.bukkit.Bukkit;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
+
+import net.md_5.bungee.api.ChatColor;
 
 public class LivesManager {
 	
@@ -49,7 +53,19 @@ public class LivesManager {
 			lose();
 		}		
 		if(active) {
-			main.scoreTracker.updateScoreBoardOfLives();		
+			//main.scoreTracker.updateScoreBoardOfLives(); //sendTitleWihoutScoreBoard() calls an redraw to the score board, leaving this out for now
+			for (Player p : Bukkit.getOnlinePlayers()) {
+				main.scoreTracker.sendTitleWihoutScoreBoard(p, 
+						ChatColor.BLUE + player.getDisplayName() + ChatColor.BLUE +" has Died!", "Lost one life." , 
+						8, 80, 70);
+				
+				//Play lost live sound mix
+    			p.playSound(p.getLocation(), Sound.AMBIENT_CAVE, 10, 6);
+    			p.playSound(p.getLocation(), Sound.AMBIENT_CAVE, 8, 8);
+    			p.playSound(p.getLocation(), Sound.AMBIENT_CAVE, 2, 6);
+    			p.playSound(p.getLocation(), Sound.ENTITY_ZOMBIE_CONVERTED_TO_DROWNED, 9, 1);
+    			
+			}								
 			main.saveToConfig(player);
 		}
 
