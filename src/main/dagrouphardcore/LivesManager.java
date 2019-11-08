@@ -9,7 +9,6 @@
 package main.dagrouphardcore;
 
 import org.bukkit.entity.Player;
-import net.md_5.bungee.api.ChatColor;
 
 public class LivesManager {
 	
@@ -49,8 +48,11 @@ public class LivesManager {
 		if(currentLives < 0) {
 			lose();
 		}		
-		main.scoreTracker.updateScoreBoardOfLives();		
-		main.saveToConfig(player);
+		if(active) {
+			main.scoreTracker.updateScoreBoardOfLives();		
+			main.saveToConfig(player);
+		}
+
 	}
 	
 	public void deactivate() {
@@ -58,7 +60,6 @@ public class LivesManager {
 	}
 	
 	private void lose() {
-		System.out.print(ChatColor.RED + "Failed, All Lives Are Gone!");
 		main.worldEnd();
 	}		
 	

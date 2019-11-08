@@ -20,6 +20,7 @@ package main.dagrouphardcore;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Difficulty;
+import org.bukkit.Sound;
 import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -84,6 +85,7 @@ public class GroupHardcore extends JavaPlugin {
     	this.saveConfig();
     	
     	System.out.print("[DaGroupHardcore] Config and Data Saved");
+    	
     }
     
     public void loadFromConfig() {
@@ -124,15 +126,20 @@ public class GroupHardcore extends JavaPlugin {
     	return commandHandler.onCommand(sender, command, label, args);
     }    
     
-    public void worldEnd() {
+    public void worldEnd() {    	
     	worldFailed = true;
-    	
-    	days.deactivate();
-    	livesManager.deactivate();
-    	scoreTracker.clearScoreBoard();
+    	deactivate();   	    			    	
     	
     	for (Player p : Bukkit.getOnlinePlayers()) {
-			p.sendTitle(ChatColor.DARK_RED.toString() + ChatColor.BOLD.toString() + "HARDCORE FAILED!", " " , 8, (int)(worldEndStartDelay - 20), 20);
+			p.sendTitle(ChatColor.DARK_RED.toString() + ChatColor.BOLD.toString() + "HARDCORE FAILED!", " " , 8, 
+					(int)(worldEndStartDelay - 20), 20);
+			
+			p.playSound(p.getLocation(), Sound.BLOCK_BELL_RESONATE, 4, 8);
+			p.playSound(p.getLocation(), Sound.ENTITY_GHAST_HURT, 5, 6);
+			p.playSound(p.getLocation(), Sound.ENTITY_GHAST_SCREAM, 5, 10);
+			p.playSound(p.getLocation(), Sound.ENTITY_GHAST_SCREAM, 5, 10);
+			p.playSound(p.getLocation(), Sound.ENTITY_GHAST_SCREAM, 5, 10);
+			p.playSound(p.getLocation(), Sound.AMBIENT_CAVE, 5, 6);
 		}
     	
 		if(doWorldEndEvent) {
@@ -158,7 +165,8 @@ public class GroupHardcore extends JavaPlugin {
     public void worldWin() {
     	deactivate();
     	for (Player p : Bukkit.getOnlinePlayers()) {
-			p.sendTitle(ChatColor.GREEN.toString() + ChatColor.BOLD.toString() + "YOU WON THE HARDCORE! XD", " " , 8, 40, 20);
+			p.sendTitle(ChatColor.GREEN.toString() + ChatColor.BOLD.toString() + "YOU WON THE HARDCORE! ", 
+					ChatColor.GREEN.toString() + ChatColor.BOLD.toString() + "XD" , 8, 40, 20);
 		}  	
     }
     
@@ -181,5 +189,15 @@ public class GroupHardcore extends JavaPlugin {
     	livesManager.reset(false);
     	days.reset(false);
     	saveToConfig(currentWorld);
+    }
+    
+    public void PrintStackTrace() {
+  	  System.out.println("Printing stack trace:");
+  	  StackTraceElement[] elements = Thread.currentThread().getStackTrace();
+  	  for (int i = 1; i < elements.length; i++) {
+  	    StackTraceElement s = elements[i];
+  	    System.out.println("\tat " + s.getClassName() + "." + s.getMethodName()
+  	        + "(" + s.getFileName() + ":" + s.getLineNumber() + ")");
+  	  }
     }
 }

@@ -22,7 +22,6 @@ public class DaysTracker {
 	}	
 	
 	public void startDayChecker() {
-		
 		taskID = Bukkit.getScheduler().scheduleSyncRepeatingTask(main, new Runnable() {
             @Override
             public void run() {
@@ -45,15 +44,16 @@ public class DaysTracker {
 		if(daysLeft == 0) {
 			lose();
 		}
-		else {
-			//Bukkit.broadcastMessage("A Day Has Passed...");
+		else {			
 			for (Player p : Bukkit.getOnlinePlayers()) {
 				p.sendTitle(ChatColor.DARK_RED + "A Day Has Passed...",
 						" ", 8, 80, 70);
 			}
 		}
-		main.scoreTracker.updateScoreBoardOfDaysLeft();	
-		main.saveToConfig(main.currentWorld);
+		if(active) {
+			main.scoreTracker.updateScoreBoardOfDaysLeft();	
+			main.saveToConfig(main.currentWorld);
+		}
 	}
 	
 	public void setDays(int day) {
@@ -70,23 +70,23 @@ public class DaysTracker {
 		active = true;
 		daysLeft = main.defualtNumberOfDays;
 		main.scoreTracker.updateScoreBoardOfDaysLeft();		
-		
+		daychecked = false;
 		if(save) {
 			main.saveToConfig(main.currentWorld);
 		}		
-		if(taskID != -1) {
-			startDayChecker();
-		}
+		
+		Bukkit.getScheduler().cancelTask(taskID);
+		startDayChecker();
+		
+		
 	}
 	
 	public void deactivate() {
 		active = false;
 		Bukkit.getScheduler().cancelTask(taskID);
-		taskID = -1;
 	}
 	
 	private void lose() {
-		System.out.print(ChatColor.RED + "Failed, No More Days!");
 		main.worldEnd();
 	}
 	
