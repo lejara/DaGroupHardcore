@@ -24,7 +24,7 @@ import net.md_5.bungee.api.ChatColor;
 public class WorldEndEvent {
 		
 	GroupHardcore main;
-	int floorExploRadius = 1;
+	int floorExploRadius = 2;
 	int randomRange = 10;
 	Long playerKickWarningTime = 920L;
 	Long playerKickTime = 1000L;
@@ -34,7 +34,9 @@ public class WorldEndEvent {
 	}
 	
 	public void startEvent() {
-		Bukkit.broadcastMessage(ChatColor.RED + "World Will Now End. >:)");
+    	for (Player p : Bukkit.getOnlinePlayers()) {
+			p.sendTitle(ChatColor.DARK_RED.toString() + "WORLD WILL NOW END! >:(", " " , 8, 40, 20);
+		}
     	World world = main.getServer().getWorlds().get(0);
     	
     	world.setTime(13000);

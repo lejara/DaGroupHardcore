@@ -20,6 +20,7 @@ package main.dagrouphardcore;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Difficulty;
+import org.bukkit.Sound;
 import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -36,8 +37,8 @@ public class GroupHardcore extends JavaPlugin {
 	boolean doWorldEndEvent = false;
 	boolean active = true;
 	int defualtNumberOfLives = 4;	
-	int defualtNumberOfDays = 12;
-	Long worldEndStartDelay = 80L;
+	int defualtNumberOfDays = 10;
+	Long worldEndStartDelay = 140L;
 	
 	World currentWorld;
 	
@@ -53,7 +54,7 @@ public class GroupHardcore extends JavaPlugin {
     	loadFromConfig();
     	currentWorld.setDifficulty(Difficulty.HARD);
     	worldEndEvent = new WorldEndEvent(this);
-    	scoreTracker = new ScorebroadTracker(livesManager, days);
+    	scoreTracker = new ScorebroadTracker(livesManager, days, this);
     	commandHandler = new GroupHCCommandHandler(livesManager, days, this);
     	    	
     	getServer().getPluginManager().registerEvents(new DeathListener(livesManager, this), this);
@@ -73,7 +74,6 @@ public class GroupHardcore extends JavaPlugin {
     }
     
     public void saveToConfig(World world) {    	
-    	
     	this.getConfig().set("WorldID", world.getUID().hashCode()); 
     	this.getConfig().set("DoWorldEndEvent", doWorldEndEvent);
     	this.getConfig().set("CurrentLives", livesManager.currentLives);    	   	
@@ -84,6 +84,7 @@ public class GroupHardcore extends JavaPlugin {
     	this.saveConfig();
     	
     	System.out.print("[DaGroupHardcore] Config and Data Saved");
+    	
     }
     
     public void loadFromConfig() {
@@ -124,9 +125,22 @@ public class GroupHardcore extends JavaPlugin {
     	return commandHandler.onCommand(sender, command, label, args);
     }    
     
-    public void worldEnd() {
+    public void worldEnd() {    	
     	worldFailed = true;
-    	    	
+    	deactivate();   	    			    	
+    	
+    	for (Player p : Bukkit.getOnlinePlayers()) {
+			p.sendTitle(ChatColor.DARK_RED.toString() + ChatColor.BOLD.toString() + "HARDCORE FAILED!", " " , 8, 
+					(int)(worldEndStartDelay - 20), 20);
+			
+			p.playSound(p.getLocation(), Sound.BLOCK_BELL_RESONATE, 4, 8);
+			p.playSound(p.getLocation(), Sound.ENTITY_GHAST_HURT, 5, 6);
+			p.playSound(p.getLocation(), Sound.ENTITY_GHAST_SCREAM, 5, 10);
+			p.playSound(p.getLocation(), Sound.ENTITY_GHAST_SCREAM, 5, 10);
+			p.playSound(p.getLocation(), Sound.ENTITY_GHAST_SCREAM, 5, 10);
+			p.playSound(p.getLocation(), Sound.AMBIENT_CAVE, 5, 6);
+		}
+    	
 		if(doWorldEndEvent) {
 	    	Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
 			    public void run() {
@@ -144,12 +158,15 @@ public class GroupHardcore extends JavaPlugin {
 			    }
 			 }, worldEndStartDelay);
 			
-		}    	    
+		} 
     } 
     
     public void worldWin() {
     	deactivate();
-    	Bukkit.broadcastMessage(ChatColor.GREEN + "You Have Won DaGroupHardcore! XD");    	
+    	for (Player p : Bukkit.getOnlinePlayers()) {
+			p.sendTitle(ChatColor.GREEN.toString() + ChatColor.BOLD.toString() + "YOU WON THE HARDCORE! ", 
+					ChatColor.GREEN.toString() + ChatColor.BOLD.toString() + "XD" , 8, 40, 20);
+		}  	
     }
     
     public void deactivate() {
@@ -171,5 +188,15 @@ public class GroupHardcore extends JavaPlugin {
     	livesManager.reset(false);
     	days.reset(false);
     	saveToConfig(currentWorld);
+    }
+    
+    public void PrintStackTrace() {
+  	  System.out.println("Printing stack trace:");
+  	  StackTraceElement[] elements = Thread.currentThread().getStackTrace();
+  	  for (int i = 1; i < elements.length; i++) {
+  	    StackTraceElement s = elements[i];
+  	    System.out.println("\tat " + s.getClassName() + "." + s.getMethodName()
+  	        + "(" + s.getFileName() + ":" + s.getLineNumber() + ")");
+  	  }
     }
 }
