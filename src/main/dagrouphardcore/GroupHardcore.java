@@ -37,7 +37,7 @@ public class GroupHardcore extends JavaPlugin {
 	boolean doWorldEndEvent = false;
 	boolean active = true;
 	int defualtNumberOfLives = 4;	
-	int defualtNumberOfDays = 12;
+	int defualtNumberOfDays = 10;
 	Long worldEndStartDelay = 140L;
 	
 	World currentWorld;
@@ -74,7 +74,6 @@ public class GroupHardcore extends JavaPlugin {
     }
     
     public void saveToConfig(World world) {    	
-    	
     	this.getConfig().set("WorldID", world.getUID().hashCode()); 
     	this.getConfig().set("DoWorldEndEvent", doWorldEndEvent);
     	this.getConfig().set("CurrentLives", livesManager.currentLives);    	   	

@@ -97,7 +97,7 @@ public class GroupHCCommandHandler {
 	
 	public boolean reset(CommandSender sender) {		
 		main.reset();
-		sender.sendMessage("DaGroupHardcore Plugin Data Reseted");
+		sender.sendMessage("DaGroupHardcore Plugin Data Has Been Reset");
 		return true;
 	}
 	
@@ -134,7 +134,7 @@ public class GroupHCCommandHandler {
 		for(Player p : Bukkit.getOnlinePlayers()) {
 			p.setBedSpawnLocation(main.currentWorld.getSpawnLocation());
 		}
-		sender.sendMessage("All Online players Respawn reseted");
+		sender.sendMessage("All Online players Respawn Has Been Reset");
 		return true;
 		
 	}

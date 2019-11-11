@@ -29,8 +29,10 @@ public class DaysTracker {
                 
             	Long currentTime = main.currentWorld.getTime();
             	if((currentTime >= 0L && currentTime <= dayCheckPeriod) && !daychecked) {
-            		dayPassed();
-            		daychecked = true;
+            		if(!Bukkit.getOnlinePlayers().isEmpty()) {
+                		dayPassed();
+                		daychecked = true;
+            		}
             	}
             	if (daychecked &&  currentTime > dayCheckPeriod) {
             		daychecked = false;
@@ -77,6 +79,7 @@ public class DaysTracker {
 		
 		Bukkit.getScheduler().cancelTask(taskID);
 		startDayChecker();
+		main.currentWorld.setTime(30L);
 		
 		
 	}
