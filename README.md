@@ -1,4 +1,4 @@
-# DaGroupHardcore 1.2
+# DaGroupHardcore 1.2.1
 A spigot server plugin
 
 Minecraft group hardcore, with a shared pool of lives, and a day timer for all players on your server!
