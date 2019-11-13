@@ -1,6 +1,6 @@
 main: main.dagrouphardcore.GroupHardcore
 name: DaGroupHardcore
-version: 1.2
+version: 1.2.1
 author: lejara
 description: Hardcore minecraft using a pool of lives
 commands:

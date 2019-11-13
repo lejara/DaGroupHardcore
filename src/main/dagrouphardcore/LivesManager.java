@@ -11,8 +11,7 @@ package main.dagrouphardcore;
 import org.bukkit.Bukkit;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
-
-import net.md_5.bungee.api.ChatColor;
+import org.bukkit.ChatColor;
 
 public class LivesManager {
 	
